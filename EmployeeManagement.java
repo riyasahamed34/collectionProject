@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
 import com.ideas2it.employeeProject.model.Employee;
 
 /**
@@ -162,7 +160,7 @@ public class EmployeeManagement {
         }
     }
     
-    private String validateDate() {
+    private String validateDob() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String birthDate = scanner.next();
 
@@ -170,7 +168,7 @@ public class EmployeeManagement {
             return dateFormat.format(dateFormat.parse(birthDate));
         } catch (ParseException exception) {
             System.out.println("Enter valid date format");
-            return validateDate();
+            return validateDob();
         }   
     }
 }
