@@ -13,14 +13,14 @@ import com.ideas2it.employeeProject.model.Employee;
  */ 
 public class EmployeeManagement {
     static Scanner scanner = new Scanner(System.in);
-    Map<Integer, Employee> employeeData = new HashMap<Integer, Employee>();
+    Map<Integer, Employee> employeeDetails = new HashMap<Integer, Employee>();
     
     public static void main(String[] args) {
 	int menuOption = 0;
 	int employeeId = 1;
-	EmployeeManagement employeeObject = new EmployeeManagement();
+	EmployeeManagement employee = new EmployeeManagement();
 			
-	while (menuOption != 6 && menuOption < 6) {
+	while (6 != menuOption) {
 	    System.out.println("Enter the Options");
 	    System.out.println(" 1.Create a NewEmployee " +
 		    "\n 2.update the existing Employee" +
@@ -31,27 +31,27 @@ public class EmployeeManagement {
 	    //Choosing the options		
 	    switch(menuOption) {
 		 case 1:		
-		     employeeObject.addNewDetails(employeeId);
+		     employee.addNewEmployeeDetails(employeeId);
 		     System.out.println("your employee Id is " + employeeId);
 		     employeeId++;
 		     break;	
 		 case 2:
 		     System.out.println("Enter the employee Id  to update the details" );
 	             employeeId = scanner.nextInt();
-	             employeeObject.updateDetails(employeeId) ;
+	             employee.updateEmployeeDetails(employeeId) ;
 	             break;
 		 case 3:
 		     System.out.println("Enter the Employee Id");
 	             employeeId = scanner.nextInt();
-	             employeeObject.showDetails(employeeId);
+	             employee.showEmployeeDetails(employeeId);
 		     break;
 		 case 4:
 		     System.out.println("Enter the Employee Id");
 	             employeeId = scanner.nextInt();
-	             employeeObject.deleteDetails(employeeId);
+	             employee.deleteEmployeeDetails(employeeId);
 	             break;
 		 case 5:
-		     employeeObject.showAll();
+		     employee.showAll();
 		     break;
 	         case 6:
 		     System.out.println("Thank you");
@@ -65,59 +65,94 @@ public class EmployeeManagement {
 	
     /**
      * Creating New Employee and details
+     *
+     * @param employeeId
      */
-    void addNewDetails(int employeeId) {
+    private void addNewEmployeeDetails(int employeeId) {
     	System.out.println("Enter firstName");
         String firstName = scanner.next();
         System.out.println("Enter lastName");
         String lastName = scanner.next();
-        scanner.nextLine();
         System.out.println("Salary");
         int salary = scanner.nextInt();
         System.out.println("Mobile Number");
-        long mobileNo = scanner.nextLong();        
-        employeeData.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo));     
+        long mobileNo = validateMobileNo();        
+        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo));     
     }
     
     /**
-     * Updating the Existing Employee and details
+     * Updating the Existing Employee and
+     * 
+     * @param employeeId
      */	
-    void updateDetails(int employeeId) {
+    private void updateEmployeeDetails(int employeeId) {
 
-    	if(employeeData.containsKey(employeeId ) ) {
+    	if(employeeDetails.containsKey(employeeId ) ) {
     	    System.out.println("Enter firstName");
             String firstName = scanner.next();
             System.out.println("Enter lastName");
             String lastName = scanner.next();
-            scanner.nextLine();
             System.out.println("Salary");
             int salary = scanner.nextInt();
             System.out.println("Mobile Number");
             long mobileNo = scanner.nextLong();        
-            employeeData.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo));     
+            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo));     
         } else {
             System.out.println("There is no such Employee Id. Please check the Id ");
         }
     }
     
-    void showDetails(int employeeId) {
-    	System.out.println(employeeData.get(employeeId));	
+    /**
+     * showing the particular Employee details
+     *
+     * @param employeeId
+     */	
+    private void showEmployeeDetails(int employeeId) {
+    	System.out.println(employeeDetails.get(employeeId));	
     }
     
-    void deleteDetails(int employeeId) {
-    	employeeData.remove(employeeId);	
+    /**
+     * deleting the particular Employee details
+     * 
+     * @param employeeId
+     */
+    private void deleteEmployeeDetails(int employeeId) {
+    	employeeDetails.remove(employeeId);	
     }
     
-    void showAll() {
+    /**
+     * showing All Employees details 
+     */
+    private void showAll() {
 
-    	if (employeeData.isEmpty() ) {
+    	if (employeeDetails.isEmpty() ) {
             System.out.println("No Records found");
         } else {
-            Iterator<Employee> iterator = employeeData.values().iterator();
+            Iterator<Employee> iterator = employeeDetails.values().iterator();
             while (iterator.hasNext()) {
         	System.out.println(iterator.next());
             }	
         }	
+    }
+
+    /**
+     * Mobile No validation
+     */
+    private long validateMobileNo() {
+    	long mobileNo = scanner.nextLong();
+
+    	if (mobileNo / 1000000000 == 8 || mobileNo / 1000000000 == 6 ||
+                mobileNo / 1000000000 == 7 || mobileNo / 1000000000 == 9) {
+            return mobileNo;
+        } else {
+
+            while (mobileNo / 1000000000 != 8 && mobileNo / 1000000000 != 6 &&
+                    mobileNo / 1000000000 != 7 && mobileNo / 1000000000 != 9) {
+                System.out.println("Invalid Mobile Number, Enter again");
+         	mobileNo = scanner.nextLong();	
+            }
+            return mobileNo;	 
+        }
     }
 }
 
