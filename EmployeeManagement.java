@@ -26,11 +26,11 @@ public class EmployeeManagement {
 	EmployeeManagement employee = new EmployeeManagement();
 			
 	while (6 != menuOption) {
-	    System.out.println("\n Enter the Options");
+	    System.out.println("Enter the Options");
 	    System.out.println(" 1.Create a NewEmployee " +
 		    "\n 2.update the existing Employee" +
 		    "\n 3.show employee details \n 4.Delete the employee data" +
-		    "\n 5.showALL \n 6.Exit \n ");
+		    "\n 5.showALL \n 6.Exit");
 	    menuOption = scanner.nextInt();
 		
 	    //Choosing the options		
