@@ -12,13 +12,15 @@ public class Employee {
     private String lastName;
     private int salary;
     private long mobileNo;
+    private String dob;
     
-    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNo) {
+    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNo, String dob) {
 	this.employeeId = employeeId;
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.salary = salary;
 	this.mobileNo = mobileNo;
+	this.dob = dob;
     }
 
     public int getEmployeeId() {
@@ -61,12 +63,22 @@ public class Employee {
 	this.mobileNo = mobileNo;
     }
 
+    public String getDob() {
+	return dob;
+    }
+
+    public void setDob(String lastName) {
+	this.dob = dob;
+    }
+
     public String toString() {
 	    return "EmployeeId = " + employeeId +
 	            "\n FirstName = " + firstName + 
 		    "\n LastName = " + lastName + 
+		    "\n DateOfBirth = " + dob +
 		    "\n Salary = " + salary + 
-		    "\n MobileNo = " + mobileNo;
+		    "\n MobileNo = " + mobileNo ;
+		    
     }
 }
 

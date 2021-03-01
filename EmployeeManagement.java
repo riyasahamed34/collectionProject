@@ -1,7 +1,12 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+
+
 
 import com.ideas2it.employeeProject.model.Employee;
 
@@ -76,8 +81,9 @@ public class EmployeeManagement {
         System.out.println("Salary");
         int salary = scanner.nextInt();
         System.out.println("Mobile Number");
-        long mobileNo = validateMobileNo();        
-        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo));     
+        long mobileNo = validateMobileNo(); 
+	String dob = validateDob();       
+        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo, dob));     
     }
     
     /**
@@ -95,8 +101,9 @@ public class EmployeeManagement {
             System.out.println("Salary");
             int salary = scanner.nextInt();
             System.out.println("Mobile Number");
-            long mobileNo = scanner.nextLong();        
-            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo));     
+            long mobileNo = validateMobileNo(); 
+	    String dob = validateDob();       
+            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo, dob));     
         } else {
             System.out.println("There is no such Employee Id. Please check the Id ");
         }
@@ -153,6 +160,18 @@ public class EmployeeManagement {
             }
             return mobileNo;	 
         }
+    }
+    
+    private String validateDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String birthDate = scanner.next();
+
+        try {
+            return dateFormat.format(dateFormat.parse(birthDate));
+        } catch (ParseException exception) {
+            System.out.println("Enter valid date format");
+            return validateDate();
+        }   
     }
 }
 
