@@ -1,5 +1,7 @@
 package com.ideas2it.employeeProject.model;
 
+import java.util.Date;
+
 /**
  * Employee Pojo Class
  *
@@ -12,15 +14,15 @@ public class Employee {
     private String lastName;
     private int salary;
     private long mobileNo;
-    private String dob;
+    private Date birthDate;
     
-    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNo, String dob) {
+    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNo, Date birthDate) {
 	this.employeeId = employeeId;
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.salary = salary;
 	this.mobileNo = mobileNo;
-	this.dob = dob;
+	this.birthDate = birthDate;
     }
 
     public int getEmployeeId() {
@@ -63,19 +65,19 @@ public class Employee {
 	this.mobileNo = mobileNo;
     }
 
-    public String getDob() {
-	return dob;
+    public Date getBirthDate() {
+	return birthDate;
     }
 
-    public void setDob(String lastName) {
-	this.dob = dob;
+    public void setBirthDate(Date birthDate) {
+	this.birthDate = birthDate;
     }
 
     public String toString() {
 	    return "EmployeeId = " + employeeId +
 	            "\n FirstName = " + firstName + 
 		    "\n LastName = " + lastName + 
-		    "\n DateOfBirth = " + dob +
+		    "\n DateOfBirth = " + birthDate +
 		    "\n Salary = " + salary + 
 		    "\n MobileNo = " + mobileNo ;
 		    

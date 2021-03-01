@@ -26,11 +26,11 @@ public class EmployeeManagement {
 	EmployeeManagement employee = new EmployeeManagement();
 			
 	while (6 != menuOption) {
-	    System.out.println("Enter the Options");
+	    System.out.println("\n Enter the Options");
 	    System.out.println(" 1.Create a NewEmployee " +
 		    "\n 2.update the existing Employee" +
 		    "\n 3.show employee details \n 4.Delete the employee data" +
-		    "\n 5.showALL \n 6.Exit");
+		    "\n 5.showALL \n 6.Exit \n ");
 	    menuOption = scanner.nextInt();
 		
 	    //Choosing the options		
@@ -81,9 +81,10 @@ public class EmployeeManagement {
         System.out.println("Salary");
         int salary = scanner.nextInt();
         System.out.println("Mobile Number");
-        long mobileNo = validateMobileNo(); 
-	String dob = validateDob();       
-        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo, dob));     
+        long mobileNo = validateMobileNo();
+	System.out.println(" Enter Date of Birth in the format ('dd/MM/yyyy')");  
+	Date birthDate = dateValidate();       
+        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo, birthDate));     
     }
     
     /**
@@ -101,9 +102,10 @@ public class EmployeeManagement {
             System.out.println("Salary");
             int salary = scanner.nextInt();
             System.out.println("Mobile Number");
-            long mobileNo = validateMobileNo(); 
-	    String dob = validateDob();       
-            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo, dob));     
+            long mobileNo = validateMobileNo();
+	    System.out.println("Date of Birth in the format ('dd/MM/yyyy')"); 
+	    Date birthDate = dateValidate();       
+            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo, birthDate));     
         } else {
             System.out.println("There is no such Employee Id. Please check the Id ");
         }
@@ -162,16 +164,22 @@ public class EmployeeManagement {
         }
     }
     
-    private String validateDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String birthDate = scanner.next();
-
+    /**
+     *Date validation
+     */
+    private Date dateValidate() {
+        
         try {
-            return dateFormat.format(dateFormat.parse(birthDate));
-        } catch (ParseException exception) {
-            System.out.println("Enter valid date format");
-            return validateDate();
-        }   
+    	    String date = scanner.next();
+    	    Date birthday=new SimpleDateFormat("dd/MM/yyyy").parse(date);    
+            return birthday;
+    	} catch (Exception e) {
+    	    while(e != null) {
+    	        System.out.println(e);
+    		return dateValidate();
+    	    }
+    	    return null;
+    	}	   
     }
 }
 
