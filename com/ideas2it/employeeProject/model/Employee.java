@@ -13,16 +13,16 @@ public class Employee {
     private String firstName;
     private String lastName;
     private int salary;
-    private long mobileNo;
-    private Date birthDate;
+    private long mobileNumber;
+    private Date dateOfBirth;
     
-    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNo, Date birthDate) {
+    public Employee(int employeeId, String firstName, String lastName, int salary, long mobileNumber, Date dateOfBirth) {
 	this.employeeId = employeeId;
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.salary = salary;
-	this.mobileNo = mobileNo;
-	this.birthDate = birthDate;
+	this.mobileNumber = mobileNumber;
+	this.dateOfBirth = dateOfBirth;
     }
 
     public int getEmployeeId() {
@@ -57,29 +57,29 @@ public class Employee {
 	this.salary = salary;
     }
 
-    public long getMobileNo() {
-	return mobileNo;
+    public long getMobileNumber() {
+	return mobileNumber;
     }
 
-    public void setMobileNo(long mobileNo) {
-	this.mobileNo = mobileNo;
+    public void setMobileNumber(long mobileNumber) {
+	this.mobileNumber = mobileNumber;
     }
 
-    public Date getBirthDate() {
-	return birthDate;
+    public Date getDateOfBirth() {
+	return dateOfBirth;
     }
 
-    public void setBirthDate(Date birthDate) {
-	this.birthDate = birthDate;
+    public void setDateOfBirth(Date dateOfBirth) {
+	this.dateOfBirth = dateOfBirth;
     }
 
     public String toString() {
 	    return "EmployeeId = " + employeeId +
 	            "\n FirstName = " + firstName + 
 		    "\n LastName = " + lastName + 
-		    "\n DateOfBirth = " + birthDate +
+		    "\n DateOfBirth = " + dateOfBirth +
 		    "\n Salary = " + salary + 
-		    "\n MobileNo = " + mobileNo ;
+		    "\n MobileNumber = " + mobileNumber ;
 		    
     }
 }

@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
 import com.ideas2it.employeeProject.model.Employee;
 
 /**
@@ -23,40 +21,41 @@ public class EmployeeManagement {
     public static void main(String[] args) {
 	int menuOption = 0;
 	int employeeId = 1;
-	EmployeeManagement employee = new EmployeeManagement();
-			
-	while (6 != menuOption) {
-	    System.out.println("Enter the Options");
-	    System.out.println(" 1.Create a NewEmployee " +
+	EmployeeManagement employeeManagement = new EmployeeManagement();
+        String menuDisplay = " 1.Create a NewEmployee " +
 		    "\n 2.update the existing Employee" +
 		    "\n 3.show employee details \n 4.Delete the employee data" +
-		    "\n 5.showALL \n 6.Exit");
+		    "\n 5.showALL \n 6.Exit \n";
+			
+	while (6 != menuOption) {
+	    System.out.println("\n Enter the Options \n");
+	    System.out.println(menuDisplay);
 	    menuOption = scanner.nextInt();
 		
 	    //Choosing the options		
 	    switch(menuOption) {
 		 case 1:		
-		     employee.addNewEmployeeDetails(employeeId);
-		     System.out.println("your employee Id is " + employeeId);
+		     employeeManagement.addNewEmployeeDetails(employeeId);
+		     System.out.println("\n your employee Id is " + employeeId);
 		     employeeId++;
 		     break;	
 		 case 2:
-		     System.out.println("Enter the employee Id  to update the details" );
+		     System.out.println("\n Enter the employee Id  to update the details" );
 	             employeeId = scanner.nextInt();
-	             employee.updateEmployeeDetails(employeeId) ;
+	             employeeManagement.updateEmployeeDetails(employeeId) ;
 	             break;
 		 case 3:
-		     System.out.println("Enter the Employee Id");
+		     System.out.println("\n Enter the Employee Id");
 	             employeeId = scanner.nextInt();
-	             employee.showEmployeeDetails(employeeId);
+	             employeeManagement.showEmployeeDetails(employeeId);
 		     break;
 		 case 4:
-		     System.out.println("Enter the Employee Id");
+		     System.out.println("\n Enter the Employee Id");
 	             employeeId = scanner.nextInt();
-	             employee.deleteEmployeeDetails(employeeId);
+	             employeeManagement.deleteEmployeeDetails(employeeId);
 	             break;
 		 case 5:
-		     employee.showAll();
+		     employeeManagement.showAll();
 		     break;
 	         case 6:
 		     System.out.println("Thank you");
@@ -78,37 +77,41 @@ public class EmployeeManagement {
         String firstName = scanner.next();
         System.out.println("Enter lastName");
         String lastName = scanner.next();
-        System.out.println("Salary");
+        System.out.println("Enter Salary");
         int salary = scanner.nextInt();
-        System.out.println("Mobile Number");
-        long mobileNo = validateMobileNo();
-	System.out.println(" Enter Date of Birth in the format ('dd/MM/yyyy')");  
-	Date birthDate = dateValidate();       
-        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, mobileNo, birthDate));     
+        System.out.println("Enter Mobile Number");
+        long mobileNumber = validateMobileNumber();
+	System.out.println("Enter Date of Birth in the format ('dd/MM/yyyy')");  
+	Date dateOfBirth = dateValidate();       
+        employeeDetails.put(employeeId, new Employee(employeeId, firstName, lastName, salary, +
+                mobileNumber, dateOfBirth));
+	System.out.println("\n EmployeeDetails added successfully");    
     }
     
     /**
-     * Updating the Existing Employee and
+     * Updating the Existing Employee and Details
      * 
      * @param employeeId
      */	
     private void updateEmployeeDetails(int employeeId) {
 
-    	if(employeeDetails.containsKey(employeeId ) ) {
+    	if(employeeDetails.containsKey(employeeId)) {
     	    System.out.println("Enter firstName");
             String firstName = scanner.next();
             System.out.println("Enter lastName");
             String lastName = scanner.next();
-            System.out.println("Salary");
+            System.out.println("Enter Salary");
             int salary = scanner.nextInt();
-            System.out.println("Mobile Number");
-            long mobileNo = validateMobileNo();
-	    System.out.println("Date of Birth in the format ('dd/MM/yyyy')"); 
-	    Date birthDate = dateValidate();       
-            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, salary, mobileNo, birthDate));     
+            System.out.println("Enter Mobile Number");
+            long mobileNumber = validateMobileNumber();
+	    System.out.println(" Enter Date of Birth in the format ('dd/MM/yyyy')"); 
+	    Date dateOfBirth = dateValidate();       
+            employeeDetails.put(employeeId, new Employee (employeeId, firstName, lastName, +
+	   	    salary, mobileNumber, dateOfBirth));     
         } else {
             System.out.println("There is no such Employee Id. Please check the Id ");
         }
+	System.out.println("\n EmployeeDetails Updated successfully");
     }
     
     /**
@@ -126,7 +129,8 @@ public class EmployeeManagement {
      * @param employeeId
      */
     private void deleteEmployeeDetails(int employeeId) {
-    	employeeDetails.remove(employeeId);	
+    	employeeDetails.remove(employeeId);
+	System.out.println("\n EmployeeDetails Deleted successfully");	
     }
     
     /**
@@ -134,7 +138,7 @@ public class EmployeeManagement {
      */
     private void showAll() {
 
-    	if (employeeDetails.isEmpty() ) {
+    	if (employeeDetails.isEmpty()) {
             System.out.println("No Records found");
         } else {
             Iterator<Employee> iterator = employeeDetails.values().iterator();
@@ -147,21 +151,14 @@ public class EmployeeManagement {
     /**
      * Mobile No validation
      */
-    private long validateMobileNo() {
-    	long mobileNo = scanner.nextLong();
-
-    	if (mobileNo / 1000000000 == 8 || mobileNo / 1000000000 == 6 ||
-                mobileNo / 1000000000 == 7 || mobileNo / 1000000000 == 9) {
-            return mobileNo;
-        } else {
-
-            while (mobileNo / 1000000000 != 8 && mobileNo / 1000000000 != 6 &&
-                    mobileNo / 1000000000 != 7 && mobileNo / 1000000000 != 9) {
+    private long validateMobileNumber() {
+    	long mobileNumber = scanner.nextLong();
+            while (8 != mobileNumber / 1000000000 && 6 != mobileNumber / 1000000000 &&
+                    7 != mobileNumber / 1000000000 && 9 != mobileNumber / 1000000000) {
                 System.out.println("Invalid Mobile Number, Enter again");
-         	mobileNo = scanner.nextLong();	
+         	mobileNumber = scanner.nextLong();	
             }
-            return mobileNo;	 
-        }
+            return mobileNumber;	 
     }
     
     /**
@@ -171,11 +168,13 @@ public class EmployeeManagement {
         
         try {
     	    String date = scanner.next();
-    	    Date birthday=new SimpleDateFormat("dd/MM/yyyy").parse(date);    
-            return birthday;
+    	    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse(date);    
+            return dateOfBirth;
     	} catch (Exception e) {
-    	    while(e != null) {
+    	    while(null != e) {
     	        System.out.println(e);
+		System.out.println("\n Invalid date Format, " +
+		        "please Enter Date of Birth in the format ('dd/MM/yyyy')");
     		return dateValidate();
     	    }
     	    return null;
